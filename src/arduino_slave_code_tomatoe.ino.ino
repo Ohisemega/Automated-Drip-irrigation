@@ -23,8 +23,8 @@ const uint64_t PTXpipe = wAddress[ WHICH_NODE - 0];   // Pulls the address from 
 float averageT;
     float average (int sensorValue, int sensorValue1 ,int sensorValue2 ,int sensorValue3, int sensorValue4)
                    {
-                     float value = (sensorValue + sensorValue1 + sensorValue2 + sensorValue3 + sensorValue4)/5;
-                                return(value);
+                     float value = (sensorValue + sensorValue1 + sensorValue2 + sensorValue3 + sensorValue4)/numReadings;
+                     return(value);
                     }
 
 
@@ -66,7 +66,7 @@ sensorValue4 = map(sensorValue4, 1023, 416, 0, 100);
 sensorValue4 = constrain(sensorValue4, 0, 100);
 
 //calculate the average of the moisture values.
-averageT = (sensorValue + sensorValue1 + sensorValue2 + sensorValue3 + sensorValue4)/numReadings;
+averageT = average(sensorValue, sensorValue1, sensorValue2 , sensorValue3, sensorValue4);
 
  radio.write(&averageT, sizeof(averageT));
  radio.write(&check, sizeof(check));
